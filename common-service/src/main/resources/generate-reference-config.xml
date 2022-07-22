@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	
+	 http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- DD310 Oubound Bank Reference Number -->
+	<bean id="DARDR_ReqBankRefNum"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="msgID" value="300" />
+		<property name="entityID" value="entityID" />
+		<property name="date" value="date" />
+		<property name="time" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s%3$s%4$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="entityID,msgID,date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="DARDR_ReqBankRef_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="DACDR_ConfBankRefNum"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="msgID" value="310" />
+		<property name="entityID" value="entityID" />
+		<property name="date" value="date" />
+		<property name="time" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s%3$s%4$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="entityID,msgID,date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="DACDR_ConBankRef_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- DD310 Oubound Bank Reference Number -->
+
+
+	<bean id="ODEDR_SpoBnkTxnNum"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="msgID" value="500" />
+		<property name="entityID" value="entityID" />
+		<property name="date" value="date" />
+		<property name="time" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s%3$s%4$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="entityID,msgID,date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="ODEDR_SpoBnkTxn_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- DD502 Oubound Bank Reference Number -->
+
+
+	<bean id="OREDR_SndBnkTxnNum"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="msgID" value="502" />
+		<property name="entityID" value="entityID" />
+		<property name="date" value="date" />
+		<property name="time" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s%3$s%4$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="entityID,msgID,date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="OREDR_SndBnkTxn_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+
+	<!-- transaction ref number 501 -->
+	<bean id="TXN_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="TXN_SeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="BNK_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="date" value="date" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="BNK_SeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="4" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="FILENAME_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="FILE_SeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	
+
+	<bean id="FILE_INOUT_BATCH_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="date" value="date" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="OUT_BATCH_REF_NUM" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- CONNECT24 SEQUENCE GENRATOR 12 DIGIT NUMBER <6 DDMMYY><6 UNIQUE SEQUENCE> -->
+
+	<bean id="Connect24SequenceGen"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="date" value="date" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="Connect24_feild11_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- file name generation with seqence number from seq table -->
+	<bean id="ACH500DR_FILENAME_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="fixedValue" value="INP" />
+		<property name="msgID" value="ACH" />
+		<property name="transType" value="DR" />
+		<property name="entityID" value="entityID" />
+		<property name="npciUserName" value="${npciUser}" />
+		<property name="fileDate" value="fileDate" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s-%2$s-%3$s-%4$s-%5$s-%6$s-%7$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="msgID,transType,entityID,npciUserName,fileDate,seqValue,fixedValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="ACH500_FileSeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="ACH500CR_FILENAME_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="fixedValue" value="INP" />
+		<property name="msgID" value="ACH" />
+		<property name="transType" value="CR" />
+		<property name="entityID" value="entityID" />
+		<property name="npciUserName" value="${npciUser}" />
+		<property name="fileDate" value="fileDate" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s-%2$s-%3$s-%4$s-%5$s-%6$s-%7$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="msgID,transType,entityID,npciUserName,fileDate,seqValue,fixedValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="ACH500_FileSeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+	<!-- EOD of file name generation with seqence number from seq table -->
+
+	<bean id="ACH500APBCR_FILENAME_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="fixedValue" value="INP" />
+		<property name="msgID" value="APB" />
+		<property name="transType" value="CR" />
+		<property name="entityID" value="entityID" />
+		<property name="npciUserName" value="${npciUser}" />
+		<property name="fileDate" value="fileDate" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s-%2$s-%3$s-%4$s-%5$s-%6$s-%7$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="msgID,transType,entityID,npciUserName,fileDate,seqValue,fixedValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="ACH500_FileSeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="EAPImandate_PAIN009_FILENAME_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="fixedValue" value="INP" />
+		<property name="msgID" value="MMS" />
+		<property name="transType" value="CREATE" />
+		<property name="entityID" value="entityID" />
+		<property name="npciUserName" value="${npciUser}" />
+		<property name="fileDate" value="fileDate" />
+		<property name="mndType" value="API" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s-%2$s-%3$s-%4$s-%5$s-%6$s%7$s-%8$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="msgID,transType,entityID,npciUserName,fileDate,mndType,seqValue,fixedValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+				<constructor-arg type="java.lang.String" value="PAIN009_FileSeqNumber_Seq" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+</beans>

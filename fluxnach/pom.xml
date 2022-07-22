@@ -264,5 +264,6 @@
 	<modules>
 		<module>../outward-payment-server</module>
 		<module>../entity-model</module>
+		<module>../common-service</module>
 	</modules>
 </project>

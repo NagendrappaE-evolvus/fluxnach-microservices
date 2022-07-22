@@ -1,0 +1,268 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.10</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>io.paycorp</groupId>
+	<artifactId>fluxnach</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>fluxnach</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<java.version>11</java.version>
+		<camel.version>3.17.0</camel.version>
+
+		<required.maven.version>3.8.2</required.maven.version>
+
+		<!-- sonar attributes -->
+		<sonar.organization>evolvus-2007-01-01</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+		<!-- plugin attributes -->
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm
+		</maven.build.timestamp.format>
+		<paycorp.license.version>1.0.0</paycorp.license.version>
+
+		<!-- Plugin Versions -->
+		<assembly.plugin.version>3.3.0</assembly.plugin.version>
+		<enforcer.plugin.version>3.0.0</enforcer.plugin.version>
+		<maven.plugin.version>2.8.1</maven.plugin.version>
+		<clean.plugin.version>3.1.0</clean.plugin.version>
+		<resources.plugin.version>3.2.0</resources.plugin.version>
+		<compiler.plugin.version>3.10.0</compiler.plugin.version>
+		<jar.plugin.version>3.2.2</jar.plugin.version>
+		<install.plugin.version>3.0.0-M1</install.plugin.version>
+		<deploy.plugin.version>3.0.0-M2</deploy.plugin.version>
+		<surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
+		<release.plugin.version>3.0.0-M5</release.plugin.version>
+		<site.plugin.version>3.11.0</site.plugin.version>
+		<versions.plugin.version>2.9.0</versions.plugin.version>
+		<project-info-reports.plugin.version>3.2.2
+		</project-info-reports.plugin.version>
+
+		<license.plugin.version>2.0.0</license.plugin.version>
+		<jgitflow.plugin.version>1.0-m5.1</jgitflow.plugin.version>
+
+
+		<jasypt.spring.boot.starter.version>3.0.3
+		</jasypt.spring.boot.starter.version>
+		<bouncy.castle.version>1.70</bouncy.castle.version>
+		<cxf.version>3.5.1</cxf.version>
+		<spring-boot-admin.version>2.6.7</spring-boot-admin.version>
+
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-spring-boot-starter</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-ftp-starter</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcpg-jdk15on</artifactId>
+				<version>${bouncy.castle.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>external.atlassian.jgitflow</groupId>
+					<artifactId>jgitflow-maven-plugin</artifactId>
+					<version>${jgitflow.plugin.version}</version>
+					<configuration>
+						<flowInitContext>
+							<masterBranchName>release</masterBranchName>
+							<developBranchName>main</developBranchName>
+							<featureBranchPrefix>feature-</featureBranchPrefix>
+							<releaseBranchPrefix>release-</releaseBranchPrefix>
+							<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+							<versionTagPrefix>version-</versionTagPrefix>
+						</flowInitContext>
+						<username>${git.user}</username>
+						<password>${git.password}</password>
+						<noDeploy>true</noDeploy>
+						<squash>true</squash>
+						<scmCommentPrefix>[RELEASE]</scmCommentPrefix>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${enforcer.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>${required.maven.version}</version>
+									</requireMavenVersion>
+									<requireJavaVersion>
+										<version>[1.8,12)</version>
+									</requireJavaVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>${versions.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${assembly.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${clean.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${site.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${resources.plugin.version}</version>
+					<configuration>
+						<delimiters>
+							<delimiter>@</delimiter>
+						</delimiters>
+						<useDefaultDelimiters>false</useDefaultDelimiters>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${surefire.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${jar.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${install.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${deploy.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${release.plugin.version}</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${project-info-reports.plugin.version}</version>
+				</plugin>
+				<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
+					<version>${license.plugin.version}</version> <configuration> <licenseName>paycorp</licenseName> 
+					<licenseResolver>classpath://legal</licenseResolver> <projectName>Paycorp</projectName> 
+					<processStartTag>********************************************************************************</processStartTag> 
+					<processEndTag>********************************************************************************</processEndTag> 
+					<emptyLineAfterHeader>true</emptyLineAfterHeader> <sectionDelimiter>**</sectionDelimiter> 
+					<includes>**/*.java, **/*.jsp, **/*.xml</includes> <excludes>**/package-info.java,**/module-info.java,**/*Test.java</excludes> 
+					<trimHeaderLine>true</trimHeaderLine> <skipUpdateLicense>true</skipUpdateLicense> 
+					</configuration> <executions> <execution> <goals> <goal>update-file-header</goal> 
+					</goals> <phase>process-sources</phase> </execution> </executions> <dependencies> 
+					<dependency> <groupId>io.paycorp</groupId> <artifactId>paycorp-license</artifactId> 
+					<version>${paycorp.license.version}</version> </dependency> </dependencies> 
+					</plugin> -->
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>${jgitflow.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+
+	<organization>
+		<name>Paycorp</name>
+		<url>https://www.paycorp.io/</url>
+	</organization>
+	<scm>
+		<developerConnection>https://github.com/paycorp-io/sftpservercomponent.git</developerConnection>
+		<connection>https://github.com/paycorp-io/sftpservercomponent.git</connection>
+		<url>https://github.com/paycorp-io/sftpservercomponent.git</url>
+	</scm>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nach-snapshot</id>
+			<name>nach-snapshot</name>
+			<url>http://hobbs.evolvus.com/nexus/repository/nach-snapshot</url>
+		</snapshotRepository>
+		<repository>
+			<id>nach-release</id>
+			<name>nach-release</name>
+			<url>http://hobbs.evolvus.com/nexus/repository/nach-release</url>
+		</repository>
+	</distributionManagement>
+
+	<modules>
+		<module>../outward-payment-server</module>
+		<module>../entity-model</module>
+	</modules>
+</project>

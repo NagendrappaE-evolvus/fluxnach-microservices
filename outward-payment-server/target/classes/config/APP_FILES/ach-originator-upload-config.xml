@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanio xmlns="http://www.beanio.org/2012/03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.beanio.org/2011/01 http://www.beanio.org/2011/01/mapping.xsd">
+
+	<stream name="ACHORG_Upload" format="csv">
+		
+		<record name="detail" class="io.paycorp.fluxnach.entity.FpdFileInout"
+			minOccurs="0" maxOccurs="unbounded">
+			<field name="orgTxnRef" required="true" position="0"/>
+			<field name="claimAmt" required="true" position="1"/>
+			<field name="umrn" required="true" position="2"/>
+		</record>
+	</stream>
+
+</beanio>

@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	
+	 http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+<bean id="FILE_INOUT_BATCH_SeqNumber"
+		class="io.paycorp.fluxnach.commonservice.GenericReferenceService">
+		<property name="msgFormat" value="" />
+		<property name="date" value="date" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
+				<property name="format" value="%1$s%2$s" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names" value="date,seqValue" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="seqNumberService">
+			<bean class="io.paycorp.fluxnach.entity.service.FpdSeqNumberService">
+				<constructor-arg type="java.lang.String" value="OUT_BATCH_REF_NUM" />
+				<constructor-arg type="java.lang.String" value="6" />
+				<constructor-arg type="java.lang.String" value="0" />
+			</bean>
+		</property>
+	</bean>
+	
+	
+</beans>

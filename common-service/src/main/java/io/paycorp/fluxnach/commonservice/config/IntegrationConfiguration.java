@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Configuration
 @Slf4j
-@ImportResource({ "classpath*:application-context.xml" })
+//@ImportResource({ "classpath*:generate-reference-config.xml" })
 public class IntegrationConfiguration {
 
 }

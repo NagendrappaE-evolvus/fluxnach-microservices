@@ -89,6 +89,13 @@
 				<artifactId>bcpg-jdk15on</artifactId>
 				<version>${bouncy.castle.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.beanio</groupId>
+				<artifactId>beanio</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

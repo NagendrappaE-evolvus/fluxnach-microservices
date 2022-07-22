@@ -21,7 +21,7 @@ public class FpdOrg {
 
 	@Id
 	@SequenceGenerator(name = "FPD_ORG_SEQ")
-	private Long orgMId;
+	private Long org_M_Id;
 
 	private String orgRefNo;
 
@@ -49,9 +49,12 @@ public class FpdOrg {
 
 	private String orgRegdIdNum;
 
-	private Date orgRegdIdIssueDate;
+	private Date orgRegdIdIssDt;
 
-	private Date orgRegdIdExpireDate;
+	private Date orgRegdIdExpDt;
+	
+    private String refCode;
+
 
 	/*
 	 * @ManyToOne(fetch = FetchType.EAGER)
@@ -88,6 +91,9 @@ public class FpdOrg {
 
 	private int autoApproveFlag;
 
-	private String mndRef1Required;
+	private String mndRef1_Required;
+	
+	private String reqStatus;
+
 
 }

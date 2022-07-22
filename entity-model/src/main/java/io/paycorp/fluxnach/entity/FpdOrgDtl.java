@@ -5,7 +5,6 @@ package io.paycorp.fluxnach.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,157 +27,154 @@ public class FpdOrgDtl {
 	@Id
 	@SequenceGenerator(name = "FPD_ORG_DTL_SEQ")
 	private Long orgDetId;
-	
-	
-	    private String orgRefNo;
 
-	    private String orgOldRefNo;
+	private String orgRefNo;
 
-	    private String orgAcctNum;
+	private String orgOldRefNo;
 
-	    private String orgChargAcctNum;
-	    /**
-	     * declared orgPeaCode.
-	     */
-	    private String orgPeaCode;
-	    /**
-	     * declared orgSeaCode.
-	     */
-	    private String orgSeaCode;
-	    /**
-	     * declared orgCnfType.
-	     */
-	    private String orgCnfType;
-	    /**
-	     * declared orgCnfLength.
-	     */
-	    private Long orgCnfLen;
-	    /**
-	     * declared orgCnfSample.
-	     */
-	    private String orgCnfSample;
-	    /**
-	     * declared orgBillFreqCode.
-	     */
-	    private String orgBillFreqCode;
-	    /**
-	     * declared orgCurCustCount.
-	     */
-	    private Long orgCurCustCount;
-	    /**
-	     * declared orgBusinessNature.
-	     */
-	    private String orgBusinessNature;
-	    /**
-	     * declared orgDetailInfo.
-	     */
+	private String orgAcctNum;
 
-	    private String orgDetailInfo;
+	private String orgChargAcctNum;
+	/**
+	 * declared orgPeaCode.
+	 */
+	private String orgPeaCode;
+	/**
+	 * declared orgSeaCode.
+	 */
+	private String orgSeaCode;
+	/**
+	 * declared orgCnfType.
+	 */
+	private String orgCnfType;
+	/**
+	 * declared orgCnfLength.
+	 */
+	private Long orgCnfLen;
+	/**
+	 * declared orgCnfSample.
+	 */
+	private String orgCnfSample;
+	/**
+	 * declared orgBillFreqCode.
+	 */
+	private String orgBillFreqCode;
+	/**
+	 * declared orgCurCustCount.
+	 */
+	private Long orgCurCustCount;
+	/**
+	 * declared orgBusinessNature.
+	 */
+	private String orgBusinessNature;
+	/**
+	 * declared orgDetailInfo.
+	 */
 
-	    private String statementFreq;
+	private String orgDetailInfo;
 
-	    private String chargesPlanCode;
+	private String statementFreq;
 
-	    private String bankSpecificNotes;
+	private String chargesPlanCode;
 
-	    private Date orgConfReviewDttime;
+	private String bankSpecificNotes;
 
-	    private String reviewerName;
+	private Date orgConfReviewDttime;
 
-	    private String approval1UserId;
+	private String reviewerName;
 
-	    private String approval2UserId;
+	private String approval1_UserId;
 
-	    // Code added to add the reference number.
+	private String approval2_UserId;
 
-	    private String doc1RefNo;
+	// Code added to add the reference number.
 
-	    // *******Sample Bill*********************************
-	    private String doc2RefNo;
+	private String doc1_RefNo;
 
-	    // *******Signed UAEDDS Conformity********************
-	    private String doc3RefNo;
+	// *******Sample Bill*********************************
+	private String doc2_RefNo;
 
-	    // *******Customer Service Agreement Template*********
-	    private String doc4RefNo;
+	// *******Signed UAEDDS Conformity********************
+	private String doc3_RefNo;
 
-	    // *******Dispute Resolution Process Document*********
-	    private String doc5RefNo;
+	// *******Customer Service Agreement Template*********
+	private String doc4_RefNo;
 
-	    @Column(name = "IS_DOC1_COLLECTED", length = 1)
-	    private String isDoc1Collected;
+	// *******Dispute Resolution Process Document*********
+	private String doc5_RefNo;
 
-	    @Column(name = "IS_DOC2_COLLECTED", length = 1)
-	    private String isDoc2Collected;
+	private String isDoc1_Collected;
 
-	    private String isDoc3Collected;
+	private String isDoc2_Collected;
 
-	    private String isDoc4Collected;
+	private String isDoc3_Collected;
 
-	    @ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "ORG_M_ID", nullable = true)
-	    private FpdOrg orgMasterId;
+	private String isDoc4_Collected;
 
-	    private String qStatus;
-	    /**
-	     * declared delFlag.
-	     */
-	    private int delFlag;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ORG_M_ID", nullable = true)
+	private FpdOrg orgMasterId;
 
-	    private int authLevel;
+	private String qStatus;
+	/**
+	 * declared delFlag.
+	 */
+	private int delFlag;
 
-	    private int processStatus;
+	private int authLevel;
 
-	    private int orgTxnFlag;
+	private int processStatus;
 
-	    private String authComment;
+	private int orgTxnFlag;
 
-	    private String ddsFileName;
+	private String authComment;
 
-	    private String crtUserId;
-	    private String lastAuthUsrId;
+	private String ddsFileName;
 
-	    private String instCode;
+	private String crtUsrId;
+	private String lastAuthUsrId;
 
-	    @Id
-	    @Transient
-	    private String priemContName;
+	private String instCode;
 
-	    @Id
-	    @Transient
-	    private String priemContTel;
+	@Id
+	@Transient
+	private String priemContName;
 
-	    @Id
-	    @Transient
-	    private String priemContEmail;
+	@Id
+	@Transient
+	private String priemContTel;
 
-	    @Id
-	    @Transient
-	    private String seacContName;
+	@Id
+	@Transient
+	private String priemContEmail;
 
-	    @Id
-	    @Transient
-	    private String seacContTel;
+	@Id
+	@Transient
+	private String seacContName;
 
-	    @Id
-	    @Transient
-	    private String seacContEmail;
+	@Id
+	@Transient
+	private String seacContTel;
 
-	    @Id
-	    @Transient
-	    private String helpContTel;
+	@Id
+	@Transient
+	private String seacContEmail;
 
-	    @Id
-	    @Transient
-	    private String helpContEmail;
+	@Id
+	@Transient
+	private String helpContTel;
 
-	    // for storing the batch file reference
-	    private String batchRefNum;
+	@Id
+	@Transient
+	private String helpContEmail;
 
-	    // for storing the conformity batch file reference
-	    private String confBatchRefNum;
+	// for storing the batch file reference
+	private String batchRefNum;
 
-	    @Version
-	    private Long version;
+	// for storing the conformity batch file reference
+	private String confBatchRefNum;
+
+	@Version
+	private Long version;
 
 }

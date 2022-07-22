@@ -23,20 +23,21 @@ import org.beanio.StreamFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 
 import io.paycorp.fluxnach.commonservice.GenericReferenceService;
 import io.paycorp.fluxnach.entity.FpdFileInout;
 import io.paycorp.fluxnach.entity.FpdPaymentOut;
 import io.paycorp.fluxnach.entity.service.FpdFileInoutService;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author nagendrappae
  *
  */
-@Component
+//@Component
 @Slf4j
+@Data
 public class PreProcessor implements Processor {
 	private static final String ERR_FILE_NAME_HEADER = "camelErrFileName";
 

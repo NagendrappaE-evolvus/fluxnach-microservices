@@ -25,6 +25,8 @@ public class FileUploadProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
+		
+		System.out.println("hiiii");
 		/*
 		 * errorMsgList = new ArrayList<>(); try { List<F> payList =
 		 * (List<OutwardPayment>) exchange .getIn().getBody(); OutwardBatchPayment

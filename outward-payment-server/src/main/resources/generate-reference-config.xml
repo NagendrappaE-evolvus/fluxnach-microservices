@@ -36,7 +36,7 @@
 	</bean>
 
 <bean id="preProcessor" class="io.paycorp.fluxnach.outwardpaymentserver.processor.PreProcessor">
-		<property name="streamMapping" value="file:///.config/APP_FILES/ach-originator-upload-config.xml" />
+		<property name="streamMapping" value="file:///${filepath}/APP_FILES/ach-originator-upload-config.xml" />
 		<property name="streamName" value="ACHORG_Upload" />
 		<property name="path" value="${localErrorFolder}" />
 	</bean>

@@ -1,0 +1,21 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+	<route id="npci.download" autoStartup="{{npci.download.enable}}">
+		<from
+			uri="file://{{localACHFolder}}IMPORT?filter=#orgdrFilter&amp;move=.Success&amp;moveFailed=.Error&amp;delay={{File_Process_Delay}}&amp;idempotent=true" />
+
+		<setHeader name="camelErrFileName">
+			<simple>${file:name.noext}-ERR-${date:now:yyMMddHHmmss}.txt</simple>
+		</setHeader>
+		<process ref="preProcessor" />
+		<choice>
+			<when>
+				<simple>${header.fileStatus} != 'ERROR'</simple>
+				<process ref="fileUploadProcessor" />
+			</when>
+		</choice>
+	</route>
+</routes>
+
+
+

@@ -18,4 +18,5 @@ import io.paycorp.fluxnach.entity.FpdFileInout;
 @Transactional
 public interface FpdFileInoutRepository extends CrudRepository<FpdFileInout, Long> {
 
+	public FpdFileInout findByBatchFileName(String batchFileName);
 }

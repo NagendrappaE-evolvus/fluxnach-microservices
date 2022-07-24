@@ -3,9 +3,11 @@
  */
 package io.paycorp.fluxnach.entity.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.paycorp.fluxnach.entity.FpdFileInout;
+import io.paycorp.fluxnach.entity.repository.FpdFileInoutRepository;
 
 /**
  * @author nagendrappae
@@ -14,13 +16,15 @@ import io.paycorp.fluxnach.entity.FpdFileInout;
 @Service
 public class FpdFileInoutService {
 
+	@Autowired
+	private FpdFileInoutRepository ffirepo;
+
 	public FpdFileInout getByBatchFileName(String fileName) {
-		// TODO Auto-generated method stub
-		return null;
+		return ffirepo.findByBatchFileName(fileName);
 	}
 
 	public void update(FpdFileInout outwardBatchPayment) {
-		// TODO Auto-generated method stub
+		ffirepo.save(outwardBatchPayment);
 		
 	}
 

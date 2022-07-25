@@ -111,11 +111,9 @@ public class FpdOrgDtl {
 
 	private String isDoc4_Collected;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ORG_M_ID", nullable = true)
-	private FpdOrg orgMasterId;
+	private Long org_M_Id;
 
-	private String qStatus;
+    private String qStatus;
 	/**
 	 * declared delFlag.
 	 */

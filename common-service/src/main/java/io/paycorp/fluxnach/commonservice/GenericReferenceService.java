@@ -7,6 +7,7 @@ import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.stereotype.Service;
 
 import io.paycorp.fluxnach.entity.service.FpdSeqNumberService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,9 +15,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author nagendrappae
  *
  */
-@Service
+//@Service
 @Data
 @Slf4j
+@AllArgsConstructor
 public class GenericReferenceService {
 	/**
 	 * Declared variable lineAggregator of
@@ -24,9 +26,9 @@ public class GenericReferenceService {
 	 */
 	
 	
-	public GenericReferenceService() {
-	}
-	
+	/*
+	 * public GenericReferenceService() { }
+	 */
 	private LineAggregator<GenericReferenceService> lineAggregator;
 	/**
 	 * Declared variable msgFormat.
@@ -68,10 +70,10 @@ public class GenericReferenceService {
 	private String npciUserName;
 	private String mandateIndentifier;
 	
-	public GenericReferenceService(FpdSeqNumberService seqNumberService) {
-		super();
-		this.seqNumberService = seqNumberService;
-	}
+	/*
+	 * public GenericReferenceService(FpdSeqNumberService seqNumberService) {
+	 * super(); this.seqNumberService = seqNumberService; }
+	 */
 	
 	public String getNextReference() {
 		try {

@@ -20,15 +20,13 @@ import org.beanio.BeanReaderErrorHandlerSupport;
 import org.beanio.InvalidRecordException;
 import org.beanio.RecordContext;
 import org.beanio.StreamFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 
 import io.paycorp.fluxnach.commonservice.GenericReferenceService;
 import io.paycorp.fluxnach.entity.FpdFileInout;
 import io.paycorp.fluxnach.entity.FpdPaymentOut;
 import io.paycorp.fluxnach.entity.service.FpdFileInoutService;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,35 +35,36 @@ import lombok.extern.slf4j.Slf4j;
  */
 //@Component
 @Slf4j
-@Data
+//@Data
+@AllArgsConstructor
 public class PreProcessor implements Processor {
-	private static final String ERR_FILE_NAME_HEADER = "camelErrFileName";
 
-	private static final String FILE_PATH = "CamelFilePath";
+	final String ERR_FILE_NAME_HEADER = "camelErrFileName";
 
-	private String path;
+	final String FILE_PATH = "CamelFilePath";
 
-	BeanReader beanReader = null;
-	StreamFactory factory = null;
+	private String path = null;
+	private String fileErrName = null;
 	private String streamName;
-	private String fileErrName;
-	private String fileStatus;
-
-	private String msgType;
-	private Resource streamMapping;
-	
-	
-	@Autowired
-    @Qualifier("FILE_INOUT_BATCH_SeqNumber")
-	private GenericReferenceService genericReferenceService;
-	
+	private String fileStatus = null;
+	private String msgType = null;
 	private ArrayList<String> errorMsgList;
 
-	@Autowired
+//	@Autowired
+	// @Qualifier("FILE_INOUT_BATCH_SeqNumber")
+	private GenericReferenceService genericReferenceService;
+
+//	@Autowired
 	private FpdFileInoutService fpdFileInoutService;
+
+	Resource streamMapping = null;
 
 	@Override
 	public void process(Exchange exchange) throws Exception { // NOSONAR
+		BeanReader beanReader = null;
+
+		StreamFactory factory = null;
+
 		try (InputStream in = streamMapping.getInputStream();
 				FileInputStream fis = new FileInputStream((String) exchange.getIn().getHeader(FILE_PATH));
 				Reader reader = new InputStreamReader(fis);) {
@@ -117,7 +116,7 @@ public class PreProcessor implements Processor {
 
 			outwardBatchPayment.setBatchStatus(fileStatus);
 			outwardBatchPayment.setTxnCode("56");
-			outwardBatchPayment.setBatchItemCount((long) recCnt);
+			outwardBatchPayment.setBatchItemCnt((long) recCnt);
 			outwardBatchPayment.setMsgType("ACH_DR");
 			outwardBatchPayment.setFileCategory("ACH-500");
 			fpdFileInoutService.update(outwardBatchPayment);
@@ -131,37 +130,35 @@ public class PreProcessor implements Processor {
 			log.error("{}", e);
 		}
 	}
-	private void logError(String recType, int lineNum, String fldID,
-			String errorNum) {
+
+	private void logError(String recType, int lineNum, String fldID, String errorNum) {
 		fileStatus = "ERROR";
 		/*
 		 * String rsnDesc = reasonCodeMasterService .getByReasonCode(errorNum);
 		 */
-		String rsnDesc=null;
+		String rsnDesc = null;
 		try {
-			String errorText = recType + "," + lineNum + "," + recType + "-"
-					+ fldID + "," + errorNum + "," + rsnDesc + "\n";
+			String errorText = recType + "," + lineNum + "," + recType + "-" + fldID + "," + errorNum + "," + rsnDesc
+					+ "\n";
 			errorMsgList.add(errorText);
 		} catch (Exception e) {
 			log.debug(e.getMessage());
 		}
 	}
-	
+
 	public void writeToFile(List<String> errorList) {
 		File file = new File(path);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
-		try (FileWriter fileWriter = new FileWriter(file + File.separator + fileErrName,
-				true);) {
-			
+		try (FileWriter fileWriter = new FileWriter(file + File.separator + fileErrName, true);) {
+
 			for (String fileLine : errorList) {
 				fileWriter.write(fileLine);
 			}
 		} catch (IOException e) {
 			log.debug(e.getMessage());
-		} 
+		}
 	}
-
 
 }

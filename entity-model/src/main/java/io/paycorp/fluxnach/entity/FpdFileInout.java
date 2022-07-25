@@ -39,7 +39,7 @@ public class FpdFileInout {
 
 	private String senderRefNum;
 
-	private Long batchItemCount;
+	private Long batchItemCnt;
 
 	private String param1;
 

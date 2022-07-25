@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource({ "classpath*:generate-reference-config.xml" })
+//@ImportResource({ "classpath*:generate-reference-config.xml" })
 public class OutwardPaymentServerApplication {
 
 	public static void main(String[] args) {

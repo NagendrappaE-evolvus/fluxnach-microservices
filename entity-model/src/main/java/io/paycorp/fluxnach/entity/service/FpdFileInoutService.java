@@ -28,4 +28,8 @@ public class FpdFileInoutService {
 		
 	}
 
+	public void save(FpdFileInout outwardBatchPayment) {
+		ffirepo.save(outwardBatchPayment);
+	}
+
 }

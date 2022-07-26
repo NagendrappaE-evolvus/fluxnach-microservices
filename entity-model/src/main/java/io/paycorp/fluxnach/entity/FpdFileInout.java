@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
@@ -22,7 +24,8 @@ import lombok.Data;
 public class FpdFileInout {
 
 	@Id
-	@SequenceGenerator(name = "FPD_FILE_INOUT_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_FILE_INOUT_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_FILE_INOUT_SEQ", name = "FPD_FILE_INOUT_SEQ",allocationSize = 1)
 	private Long batchId;
 
 	private String msgType;

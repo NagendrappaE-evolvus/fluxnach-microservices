@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
@@ -21,37 +23,39 @@ import lombok.Data;
 @Data
 public class FpdMandateMaster {
 
+	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_MANDATE_MASTER_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_MANDATE_MASTER_SEQ", name = "FPD_MANDATE_MASTER_SEQ",allocationSize = 1)
 	@Id
-	@SequenceGenerator(name = "FPD_MANDATE_MASTER_SEQ")
-	private Long mndId;
+	private Long mndmId;
 
 	private String umrn;
 
-	private String sponserBankCode;
+	private String spoBankCode;
 
 	private String orgOic;
 
-	private String instructionCode;
+	private String instCode;
 
-	private String payerAccountType;
+	private String payerAcctType;
 
-	private String payerAccountNum;
+	private String payerAcctNum;
 
-	private String payerBankCode;
+	private String payBankCode;
 
-	private String amountType;
+	private String mndAmtType;
 
-	private BigDecimal minAmt;
+	private BigDecimal mndMinAmt;
 
-	private BigDecimal maxAmt;
+	private BigDecimal mndMaxAmt;
 
-	private String consumerRef;
+	private String mndConsumerRef;
 
 	private String batchRefNum;
 
 	private String schemeRef;
 
-	private int instanceAllowed;
+	private int drInstAllowed;
 
 	private String mndFreq;
 
@@ -69,7 +73,7 @@ public class FpdMandateMaster {
 
 	private String payerEmail;
 
-	private String payerMobileCon;
+	private String payerMobileCont;
 
 	private String mndCaptureMode;
 

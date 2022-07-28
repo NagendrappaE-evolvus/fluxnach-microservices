@@ -6,6 +6,8 @@ package io.paycorp.fluxnach.entity;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
@@ -20,7 +22,8 @@ import lombok.Data;
 public class FpdOrg {
 
 	@Id
-	@SequenceGenerator(name = "FPD_ORG_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_ORG_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_ORG_SEQ", name = "FPD_ORG_SEQ",allocationSize = 1)
 	private Long org_M_Id;
 
 	private String orgRefNo;
@@ -52,26 +55,8 @@ public class FpdOrg {
 	private Date orgRegdIdIssDt;
 
 	private Date orgRegdIdExpDt;
-	
-    private String refCode;
 
-
-	/*
-	 * @ManyToOne(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinColumn(name = "ORG_PRIM_CONT_ID", nullable = true) private Contacts
-	 * primaryContact;
-	 * 
-	 * @ManyToOne(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinColumn(name = "ORG_HDSK_CONT_ID", nullable = true) private Contacts
-	 * helpDeskContact;
-	 * 
-	 * @ManyToOne(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinColumn(name = "ORG_SECO_CONT_ID", nullable = true) private Contacts
-	 * secondaryContact;
-	 */
+	private String refCode;
 
 	private int delFlg;
 
@@ -91,9 +76,16 @@ public class FpdOrg {
 
 	private int autoApproveFlag;
 
-	private String mndRef1_Required;
-	
+	private String mndRef1_required;
+
 	private String reqStatus;
 
+	private String orgCrtDatetime;
+
+	private long orgHdskContId;
+
+	private long orgPrimContId;
+	
+	private long orgSecoContId;
 
 }

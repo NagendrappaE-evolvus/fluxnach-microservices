@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,12 +27,13 @@ import lombok.Data;
 public class FpdOrgDtl {
 
 	@Id
-	@SequenceGenerator(name = "FPD_ORG_DTL_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_ORG_DTL_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_ORG_DTL_SEQ", name = "FPD_ORG_DTL_SEQ",allocationSize = 1)
 	private Long orgDetId;
 
 	private String orgRefNo;
 
-	private String orgOldRefNo;
+	private String oldOrgRefNo;
 
 	private String orgAcctNum;
 
@@ -83,9 +86,9 @@ public class FpdOrgDtl {
 
 	private String reviewerName;
 
-	private String approval1_UserId;
+	private String approv1_UserId;
 
-	private String approval2_UserId;
+	private String approv2_UserId;
 
 	// Code added to add the reference number.
 
@@ -117,7 +120,7 @@ public class FpdOrgDtl {
 	/**
 	 * declared delFlag.
 	 */
-	private int delFlag;
+	private int delFlg;
 
 	private int authLevel;
 

@@ -4,6 +4,8 @@
 package io.paycorp.fluxnach.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
@@ -19,7 +21,8 @@ import lombok.Data;
 public class FpdSeqNumber {
 
 	@Id
-	@SequenceGenerator(name = "FPD_SEQ_NUMBER_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_SEQ_NUMBER_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_SEQ_NUMBER_SEQ", name = "FPD_SEQ_NUMBER_SEQ",allocationSize = 1)
 	private Long id;
 
 	private String seqCode;

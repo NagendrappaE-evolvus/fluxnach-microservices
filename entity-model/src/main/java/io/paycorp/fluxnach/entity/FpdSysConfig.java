@@ -4,6 +4,8 @@
 package io.paycorp.fluxnach.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
@@ -19,7 +21,8 @@ public class FpdSysConfig {
 
 	
 	@Id
-	@SequenceGenerator(name = "FPD_SYS_CONFIG_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_SYS_CONFIG_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_SYS_CONFIG_SEQ", name = "FPD_SYS_CONFIG_SEQ",allocationSize = 1)
 	private int id;
 	
     private String paramId;
@@ -32,11 +35,11 @@ public class FpdSysConfig {
 
     private String paramValue;
 
-    private int delFlag;
+    private int delFlg;
     
-    private String paramInfoOne;
+    private String paramInfo1;
     
-    private String paramInfoTwo;
+    private String paramInfo2;
 
 
 

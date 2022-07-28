@@ -6,6 +6,8 @@ package io.paycorp.fluxnach.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
@@ -20,7 +22,8 @@ import lombok.Data;
 public class FpdFileErr {
 
 	@Id
-	@SequenceGenerator(name = "FPD_FILE_ERR_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_FILE_ERR_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_FILE_ERR_SEQ", name = "FPD_FILE_ERR_SEQ",allocationSize = 1)
 	private Long fileErrId;
 	
 	private String lineNo;
@@ -35,7 +38,7 @@ public class FpdFileErr {
 
 	private String errDesc;
 	
-	private Date errRejectedTime;
+	private Date rejectedTime;
 
 	private String batchRefNum;
 

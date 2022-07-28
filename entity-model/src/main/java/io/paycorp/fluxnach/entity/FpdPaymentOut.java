@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
@@ -23,7 +25,8 @@ import lombok.Data;
 public class FpdPaymentOut {
 
 	@Id
-	@SequenceGenerator(name = "FPD_PAYMENT_OUT_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "FPD_PAYMENT_OUT_SEQ")
+	@SequenceGenerator(sequenceName = "FPD_PAYMENT_OUT_SEQ", name = "FPD_PAYMENT_OUT_SEQ",allocationSize = 1)
 	private Long payRef;
 
 	private String outBatchRef;

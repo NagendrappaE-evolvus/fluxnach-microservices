@@ -103,6 +103,8 @@ public class FpdFileInout {
 	private String errorFileName;
 
 	private String txnCode;
+	
+	private String orgClaimNum;
 
 	@Id
 	@Transient

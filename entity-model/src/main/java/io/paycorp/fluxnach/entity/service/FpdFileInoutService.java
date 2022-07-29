@@ -17,19 +17,19 @@ import io.paycorp.fluxnach.entity.repository.FpdFileInoutRepository;
 public class FpdFileInoutService {
 
 	@Autowired
-	private FpdFileInoutRepository ffirepo;
+	private FpdFileInoutRepository repo;
 
 	public FpdFileInout getByBatchFileName(String fileName) {
-		return ffirepo.findByBatchFileName(fileName);
+		return repo.findByBatchFileName(fileName);
 	}
 
 	public void update(FpdFileInout outwardBatchPayment) {
-		ffirepo.save(outwardBatchPayment);
+		repo.save(outwardBatchPayment);
 		
 	}
 
 	public void save(FpdFileInout outwardBatchPayment) {
-		ffirepo.save(outwardBatchPayment);
+		repo.save(outwardBatchPayment);
 	}
 
 }

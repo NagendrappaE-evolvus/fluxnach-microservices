@@ -18,4 +18,6 @@ import io.paycorp.fluxnach.entity.FpdMandateMaster;
 @Transactional
 public interface FpdMandateMasterRepository extends CrudRepository<FpdMandateMaster, Long> {
 
+	FpdMandateMaster findByUmrnAndMndStatus(String umrn, String mndSts);
+
 }

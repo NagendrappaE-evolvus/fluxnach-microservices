@@ -8,21 +8,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.paycorp.fluxnach.entity.FpdSysBusiness;
-import io.paycorp.fluxnach.entity.repository.FpdSysBusinessRepository;
+import io.paycorp.fluxnach.entity.FpdDdsEntity;
+import io.paycorp.fluxnach.entity.repository.FpdDdsEntityRepository;
 
 /**
  * @author nagendrappae
  *
  */
 @Service
-public class FpdSysBusinessService {
+public class FpdDdsEntityService {
 
 	@Autowired
-	public FpdSysBusinessRepository repo;
-	public List<FpdSysBusiness> findAll() {
-		// TODO Auto-generated method stub
-		return (List<FpdSysBusiness>) repo.findAll();
-	}
+	private FpdDdsEntityRepository repo;
 
+	public List<FpdDdsEntity> findAll() {
+		// TODO Auto-generated method stub
+		return (List<FpdDdsEntity>) repo.findAll();
+	}
+	
+	
 }

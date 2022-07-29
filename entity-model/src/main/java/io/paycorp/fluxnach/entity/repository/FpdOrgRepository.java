@@ -3,6 +3,8 @@
  */
 package io.paycorp.fluxnach.entity.repository;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -17,5 +19,7 @@ import io.paycorp.fluxnach.entity.FpdOrg;
 @Repository
 @Transactional
 public interface FpdOrgRepository extends CrudRepository<FpdOrg, Long> {
+
+	Optional<FpdOrg> findByOrgOic(String oic);
 
 }

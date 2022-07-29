@@ -17,8 +17,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
 import io.paycorp.fluxnach.commonservice.GenericReferenceService;
+import io.paycorp.fluxnach.entity.service.FpdDdsEntityService;
 import io.paycorp.fluxnach.entity.service.FpdFileInoutService;
 import io.paycorp.fluxnach.entity.service.FpdSeqNumberService;
+import io.paycorp.fluxnach.entity.service.FpdSysBusinessService;
 import io.paycorp.fluxnach.outwardpaymentserver.processor.PreProcessor;
 
 /**
@@ -84,9 +86,42 @@ public class OutwardPaymentConfiguration {
 
 	@Bean
 	public GenericReferenceService FILE_INOUT_BATCH_SeqNumber(
-			@Qualifier("fiobatchSeqNumberService") FpdSeqNumberService fpdSeqNumberService,@Qualifier("fiobatchflineagregator")FormatterLineAggregator formatterLineAggregator  ) {
-		return new GenericReferenceService(formatterLineAggregator, "", null, null, "date", null, null, null, fpdSeqNumberService, null, null, null, null);
+			@Qualifier("fiobatchSeqNumberService") FpdSeqNumberService fpdSeqNumberService,@Qualifier("fiobatchflineagregator")FormatterLineAggregator formatterLineAggregator,@Autowired FpdDdsEntityService fpdDdsEntityService ,@Autowired FpdSysBusinessService fpdSysBusinessService ) {
+		return new GenericReferenceService(formatterLineAggregator, "", null, null, "date", null, null, null, fpdSeqNumberService, null, null, null, null,fpdDdsEntityService,fpdSysBusinessService);
 
 	}
+	
+	@Bean
+	public GenericReferenceService ODEDR_SpoBnkTxnNum(
+			@Qualifier("spoBnkTxnSeqNumberService") FpdSeqNumberService fpdSeqNumberService,@Qualifier("spoBnkTxnflineagregator")FormatterLineAggregator formatterLineAggregator,@Autowired FpdDdsEntityService fpdDdsEntityService ,@Autowired FpdSysBusinessService fpdSysBusinessService  ) {
+		return new GenericReferenceService(formatterLineAggregator, "", "500", "entityID", "date", "", null, null, fpdSeqNumberService, null, null, null, null,fpdDdsEntityService,fpdSysBusinessService);
+
+	}
+	
+	@Bean
+	public FpdSeqNumberService spoBnkTxnSeqNumberService() {
+
+		return new FpdSeqNumberService("ODEDR_SpoBnkTxn_Seq", "4", "0");
+
+	}
+	
+	@Bean
+	public FormatterLineAggregator spoBnkTxnflineagregator(
+			@Qualifier("spoBnkTxnfextrarctor") BeanWrapperFieldExtractor fiobatchfextrarctor) {
+		FormatterLineAggregator formatterLineAggregator = new FormatterLineAggregator();
+		formatterLineAggregator.setFormat("%1$s%2$s%3$s%4$s");
+		formatterLineAggregator.setFieldExtractor(fiobatchfextrarctor);
+		return formatterLineAggregator;
+
+	}
+
+	@Bean
+	public BeanWrapperFieldExtractor spoBnkTxnfextrarctor() {
+		BeanWrapperFieldExtractor beanWrapperFieldExtractor = new BeanWrapperFieldExtractor();
+		beanWrapperFieldExtractor.setNames(new String[] { "entityID", "msgID","date","seqValue" });
+		return beanWrapperFieldExtractor;
+
+	}
+
 
 }

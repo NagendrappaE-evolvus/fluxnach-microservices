@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import io.paycorp.fluxnach.entity.FpdSeqNumber;
+import io.paycorp.fluxnach.entity.FpdDdsEntity;
 
 /**
  * @author nagendrappae
@@ -16,9 +16,6 @@ import io.paycorp.fluxnach.entity.FpdSeqNumber;
  */
 @Repository
 @Transactional
-public interface FpdSeqNumberRepository extends CrudRepository<FpdSeqNumber, Long>{
-
-
-	FpdSeqNumber findBySeqCode(String seqCode);
+public interface FpdDdsEntityRepository extends CrudRepository<FpdDdsEntity, Long>{
 
 }
